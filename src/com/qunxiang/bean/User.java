@@ -1,11 +1,24 @@
 package com.qunxiang.bean;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 /**
@@ -18,7 +31,7 @@ import javax.persistence.Table;
 
 public class User  implements java.io.Serializable {
 
-
+	private static final long serialVersionUID = -3286564461647015367L;
     // Fields    
 
      private Integer userId;
@@ -39,8 +52,9 @@ public class User  implements java.io.Serializable {
      private String userSelfDes;
      private String userImg1;
      private String userImg2;
-
-
+     private Set<Pic> picList;
+     private Set<Order> orderLIst;
+     
     // Constructors
 
     /** default constructor */
@@ -252,7 +266,34 @@ public class User  implements java.io.Serializable {
     public void setUserImg2(String userImg2) {
         this.userImg2 = userImg2;
     }
-   
+
+  //OneToMany指定了一对多的关系，mappedBy="room"指定了由多的那一方来维护关联关系，mappedBy指的是多的一方对1的这一方的依赖的属性，(注意：如果没有指定由谁来维护关联关系，则系统会给我们创建一张中间表)
+//    LazyCollection属性设置成EXTRA指定了当如果查询数据的个数时候，只会发出一条 count(*)的语句，提高性能
+    @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+	public Set<Pic> getPicList() {
+		return picList;
+	}
+
+
+	public void setPicList(Set<Pic> picList) {
+		this.picList = picList;
+	}
+
+
+    @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+	public Set<Order> getOrderLIst() {
+		return orderLIst;
+	}
+
+
+	public void setOrderLIst(Set<Order> orderLIst) {
+		this.orderLIst = orderLIst;
+	}
+
+	
+
 
 
 

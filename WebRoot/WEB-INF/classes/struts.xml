@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 开发者模式（如果修改了xml配置文件，不用重启服务器就能起作用） -->
+<!-- 	<constant name="struts.devMode" value="true"></constant> -->
+	<!-- 允许上传的最大限制 -->
+	<constant name="struts.multipart.maxSize" value="1048576000" />
+	<!-- 设置action的后缀 -->
+<!-- 	<constant name="struts.action.extension" value=""></constant> -->
+	<package name="mypackage" extends="struts-default,json-default" namespace="">
+
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<interceptor name="systemInterceptor" class="com.qunxiang.filter.SystemInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="systemInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 配置默认action -->
+  		<default-action-ref name="errorAction"></default-action-ref>  
+  		
+		
+		<!-- 配置全局结果视图 -->
+		<global-results>
+		    <!-- 如果返回的逻辑视图名称是login的话就跳转到登录页面 -->
+			<result name="login">/WEB-INF/jsp/front/login.jsp</result>
+			<!-- 如果出错就到500页面 -->
+<!-- 			<result name="error">/500.jsp</result> -->
+		</global-results>
+		
+		<!-- 配置默认action -->
+		 <action name="errorAction">  
+  			<result>/500.jsp</result>  
+  		 </action> 
+	
+		<!-- 前台 -->
+		<!-- 会员模块 -->
+		<action name="index_*" class="indexAction" method="{1}">
+		    <!-- 这样配置，那么该action其下的所有方法都会被拦截 -->
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="indexUI">/WEB-INF/jsp/front/index.jsp</result>
+			<result name="releaseUI">/WEB-INF/jsp/front/release.jsp</result>
+			<result name="userUploadUI">/WEB-INF/jsp/front/userupload.jsp</result>
+			<result name="voteUploadUI">/WEB-INF/jsp/front/voteupload.jsp</result>
+			<result name="trainUploadUI">/WEB-INF/jsp/front/trainupload.jsp</result>
+			<result name="toNoResultPage">/WEB-INF/jsp/front/noResultPage.jsp</result>
+			<!-- 下载使用的配置 -->
+			<!-- 该参数配置的是资源所在的目录（如果实际资源改变了路径，那么该路径也要改变） -->
+			<param name="inputPath">/upload</param>
+			<!-- <param name="inputPath"></param> -->
+			<!-- 结果类型为stream -->
+			<result name="downLoadResource" type="stream">
+				<!-- 指定下载文件的类型 ;charset=ISO8859-1 -->
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<!-- action中提供InputStream类型的名称 -->
+				<param name="inputName">inputStream</param>
+				<!-- 表示处理文件的方式，是以弹出框的形式处理 filename指资源文件的名称，${fileName}指前端页面制定的实际值 -->
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<!-- 设置文件读取和下载文件缓冲区的大小 -->
+				<param name="bufferSize">4096</param>
+			 </result>
+		</action>
+		
+		<!-- user模块 -->
+		<action name="user_*" class="userAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name="loginSuccess" type="redirectAction">index_indexUI.action</result>
+			<result name="addUser" type="redirectAction">index_indexUI.action</result>
+			<result name="loginFail">/WEB-INF/jsp/front/login.jsp</result>
+			<result name="loginUI">/WEB-INF/jsp/front/login.jsp</result>
+			<result name="loginOut" type="redirectAction">user_loginUI.action</result>
+			<result name="registerUI">/WEB-INF/jsp/front/zhuche.jsp</result>
+			<result name="userUI">/WEB-INF/jsp/front/userCenter.jsp</result>
+			<result name="updateInfo" type="redirectAction">user_userUI.action</result>
+			<result name="updatePwd" type="redirectAction">user_toUpdatePwd.action</result>
+			<result name="updateImage"  type="redirectAction">user_toUpdateImage.action</result>
+			<result name="toforgetPwdUI">/WEB-INF/jsp/front/forgetPwd.jsp</result>
+			<result name="toUpdatePwd">/WEB-INF/jsp/front/userCenter.jsp</result>
+			<result name="toUpdateImage">/WEB-INF/jsp/front/userCenter.jsp</result>
+			
+			<result name="toBusinessUI">/WEB-INF/jsp/front/userCenter.jsp</result>
+			<result name="toTrainUI">/WEB-INF/jsp/front/userCenter.jsp</result>
+			<result name="toVoteUI">/WEB-INF/jsp/front/userCenter.jsp</result>
+			
+			<result name="businessUpdate" type="redirectAction">user_toBusinessUI.action</result>
+			<result name="trainUpdate" type="redirectAction">user_toTrainUI.action</result>
+			<result name="voteUpdate" type="redirectAction">user_toVoteUI.action</result>
+			
+			<result name="isExist" type="json" >
+				<param name="root">status</param>
+				   <!-- 多个属性使用 propertyies-->
+<!-- 				<param name="propertyies">status,info</param> -->
+			</result>
+			<result name="isRight" type="json">
+				<param name="root">status</param>
+			</result>
+		</action>
+		
+		<!-- 		业务能人 -->
+		<action name="business_*" class="businessAction" method="{1}">
+			<result name="businessList">/WEB-INF/jsp/front/businesspeople.jsp</result>
+			<result name="doUserUpload" type="redirectAction">index_userUploadUI.action</result>
+			<result name="businessIn">/WEB-INF/jsp/front/business_in.jsp</result>
+		</action>
+		<!-- 		培训选择 -->
+		<action name="trainChoose_*" class="trainChooseAction" method="{1}">
+			<result name="trainChoose">/WEB-INF/jsp/front/trainchoose.jsp</result>
+			<result name="doTrainUpload" type="redirectAction">index_trainUploadUI.action</result>
+			<result name="trainChooseIn">/WEB-INF/jsp/front/trainchoose_in.jsp</result>
+		</action>
+		<!-- 		培训投票 -->
+		<action name="trainVote_*" class="trainVoteAction" method="{1}">
+			<result name="trainVote">/WEB-INF/jsp/front/trainvote.jsp</result>
+			<result name="trainVoteIn">/WEB-INF/jsp/front/trainvote_in.jsp</result>
+			<result name="doVoteUpload" type="redirectAction">index_voteUploadUI.action</result>
+		</action>
+		
+		<action name="question_*" class="questionAction" method="{1}">
+			<result name="questionUI">/WEB-INF/jsp/front/question.jsp</result>
+		</action>
+		
+		
+		<!-- 后台管理 -->
+		<action name="admin_*" class="adminAction" method="{1}">
+			<result name="loginSuccess">/WEB-INF/jsp/background/index.jsp</result>
+			<result name="loginFail">/WEB-INF/jsp/background/login.jsp</result>
+			<result name="loginUI">/WEB-INF/jsp/background/login.jsp</result>
+			<result name="userUI">/WEB-INF/jsp/background/userList.jsp</result>
+			<result name="businessUI">/WEB-INF/jsp/background/businessList.jsp</result>
+			<result name="verifyBusiness" type="redirectAction">admin_businessUI.action</result>
+			<result name="trainUI">/WEB-INF/jsp/background/trainList.jsp</result>
+			<result name="verifyTrain" type="redirectAction">admin_trainUI.action</result>
+			<result name="voteUI">/WEB-INF/jsp/background/voteList.jsp</result>
+			<result name="verifyVote" type="redirectAction">admin_voteUI.action</result>
+			<result name="questionUI">/WEB-INF/jsp/background/questionList.jsp</result>
+			<result name="addQuestion" type="redirectAction">admin_questionUI.action</result>
+			<result name="updateQuestion" type="redirectAction">admin_questionUI.action</result>
+			<result name="deleteQuestion" type="redirectAction">admin_questionUI.action</result>
+			<result name="toAddQuestionUI">/WEB-INF/jsp/background/manageQuestion.jsp</result>
+			<result name="toUpdateQuestionUI">/WEB-INF/jsp/background/manageQuestion.jsp</result>
+			<result name="commentUI">/WEB-INF/jsp/background/commentList.jsp</result>
+			<result name="categoryUI">/WEB-INF/jsp/background/categoryList.jsp</result>
+			<result name="manageLogoUI">/WEB-INF/jsp/background/manageLogo.jsp</result>
+			<result name="updateLogo" type="redirectAction">admin_manageLogoUI.action</result>
+		</action>
+	</package>
+</struts>    
