@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
@@ -17,11 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.qunxiang.bean.Business;
 import com.qunxiang.bean.Data;
 import com.qunxiang.bean.Department;
 import com.qunxiang.bean.Industry;
 import com.qunxiang.bean.Train;
+import com.qunxiang.bean.User;
 import com.qunxiang.bean.Vote;
 import com.qunxiang.dao.BusinessDao;
 import com.qunxiang.dao.DataDao;
@@ -34,6 +37,11 @@ import com.qunxiang.util.JsonDateValueProcessor;
 @Controller
 @Scope("prototype")
 public class IndexAction {
+	
+	 public IndexAction() {
+		System.out.println("sssssd");
+		// TODO Auto-generated constructor stub
+	}
 	
 	@Autowired
 	private IndustryDao industryDao;
@@ -145,6 +153,10 @@ public class IndexAction {
 
 	//首页
 	public String indexUI(){
+		
+		User user = (User) ServletActionContext.getContext().getSession().get("user");
+		System.out.println(user.getPicList());
+		System.out.println(user.getOrderLIst().size());
 		//加载前10条业务能人信息
 		businessList=businessDao.findBusinessByPageSize(1, "businessFocusCount", 10);
 		//加载前10条培训课程信息

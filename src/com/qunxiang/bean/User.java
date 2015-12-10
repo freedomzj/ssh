@@ -281,7 +281,7 @@ public class User  implements java.io.Serializable {
 	}
 
 
-    @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.EXTRA)
 	public Set<Order> getOrderLIst() {
 		return orderLIst;

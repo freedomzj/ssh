@@ -58,6 +58,7 @@ public class HibernateTest {
 		Set<Pic> pic= user.getPicList();
 		int temp=6;
 		for (Pic pic2 : pic) {
+			System.out.println(pic2.getPath());
 			pic2.setPath("zengjie"+temp);
 			session.update(pic2);
 			temp++;
