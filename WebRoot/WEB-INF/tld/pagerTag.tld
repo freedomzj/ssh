@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" 
+        version="2.0">  
+	<description>分页标签</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>mytags</short-name>       <!-- 标签库名称 -->
+	<uri>mytags</uri>          <!-- uri:很重要！外界导入标签库时认识的名称 -->
+	<!-- 定义标签 -->
+	<tag>
+	   <name>page</name>                <!-- 标签名称 -->
+	   <tag-class>com.common.tag.PagerClass</tag-class>    <!-- 对应的类 -->
+	   <body-content>empty</body-content>  
+	   <attribute>
+		    <name>url</name>
+		    <required>true</required>          <!-- 是否必需 -->
+		    <rtexprvalue>true</rtexprvalue>    <!-- 能否接受表达式 -->
+	   </attribute>
+	   <attribute>
+		    <name>pageSize</name>
+		    <required>false</required>          <!-- 是否必需 -->
+		    <rtexprvalue>true</rtexprvalue>    <!-- 能否接受表达式 -->
+	   </attribute>
+	   <attribute>
+		    <name>pageNo</name>
+		    <required>false</required>          <!-- 是否必需 -->
+		    <rtexprvalue>true</rtexprvalue>    <!-- 能否接受表达式 -->
+	   </attribute>
+	   <attribute>
+		    <name>recordCount</name>
+		    <required>false</required>          <!-- 是否必需 -->
+		    <rtexprvalue>true</rtexprvalue>    <!-- 能否接受表达式 -->
+	   </attribute>
+	    <attribute>
+	  	<name>params</name>
+	  	<required>true</required>
+	  	<rtexprvalue>true</rtexprvalue> 
+	  </attribute>
+	</tag>
+</taglib>

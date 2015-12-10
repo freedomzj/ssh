@@ -1,0 +1,6 @@
+.pagination {padding: 5px;font-size:14px;}
+.pagination .erromsg{color: red;margin-left: 400px;}
+.pagination a, .pagination a:link, .pagination a:visited {padding:2px 8px;margin:2px;border:1px solid #F36C00;text-decoration:none;color:#F36C00;}
+.pagination a:hover, .pagination a:active {border: 1px solid #F36C00;color: #fff;text-decoration: none; background:#F36C00;}
+.pagination span.current {padding: 2px 8px;margin: 2px;border: 1px solid #F36C00;font-weight: bold;background-color: #F36C00;color: #FFF;}
+.pagination span.disabled {padding: 2px 8px;margin: 2px;border: 1px solid #eee; color: #ddd; cursor:default;}

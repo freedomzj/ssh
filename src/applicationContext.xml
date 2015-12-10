@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	 http://www.springframework.org/schema/aop 
+	 http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	">
+	<!-- 扫描各个包 -->
+	<context:component-scan base-package="com.*" />
+	<!-- 导入配置文件 -->
+	<context:property-placeholder location="classpath:config.properties" />
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					<!-- org.hibernate.dialect.MySQLDialect -->
+					com.qunxiang.util.CustomerDialect
+				</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.qunxiang.bean.Comment</value>
+				<value>com.qunxiang.bean.Data</value>
+				<value>com.qunxiang.bean.Question</value>
+				<value>com.qunxiang.bean.Reply</value>
+				<value>com.qunxiang.bean.Train</value>
+				<value>com.qunxiang.bean.User</value>
+				<value>com.qunxiang.bean.Business</value>
+				<value>com.qunxiang.bean.Department</value>
+				<value>com.qunxiang.bean.Vote</value>
+				<value>com.qunxiang.bean.Industry</value>
+			</list>
+		</property>
+	</bean>
+<!-- 	 Spring 统一异常处理 ExceptionAdvisor配置 --> 
+	<bean id="exceptionHandler" class="com.common.advice.ExceptionAdvisor" /> 
+	<!-- 启用支持Annotation注解方式的事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
