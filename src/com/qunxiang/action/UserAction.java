@@ -3,6 +3,7 @@ package com.qunxiang.action;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import com.qunxiang.bean.Business;
 import com.qunxiang.bean.Department;
 import com.qunxiang.bean.Industry;
+import com.qunxiang.bean.Pic;
 import com.qunxiang.bean.Train;
 import com.qunxiang.bean.User;
 import com.qunxiang.bean.Vote;
@@ -263,6 +265,10 @@ public class UserAction {
 	public String checkLogin(){
 		User user = userDao.checkLogin(username, password);
 		if(user != null){
+		 Set<Pic> picList=	user.getPicList();
+		 for (Pic pic : picList) {
+			System.out.println(pic.getPath());
+		}
 			ServletActionContext.getContext().getSession().put("user", user);
 			return "loginSuccess";
 		}else{

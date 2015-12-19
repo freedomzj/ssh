@@ -5,6 +5,8 @@
 <!-- 	<constant name="struts.devMode" value="true"></constant> -->
 	<!-- 允许上传的最大限制 -->
 	<constant name="struts.multipart.maxSize" value="1048576000" />
+	
+	<constant name="struts." value=""></constant>
 	<!-- 设置action的后缀 -->
 <!-- 	<constant name="struts.action.extension" value=""></constant> -->
 	<package name="mypackage" extends="struts-default,json-default" namespace="">

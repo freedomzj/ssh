@@ -28,7 +28,7 @@ public abstract class BaseDaoImpl<T extends Serializable> extends HibernateDaoSu
 	
 	@Autowired
 	public void setMySessionFactory(SessionFactory sessionFactory){
-		System.out.println(11111);
+		System.out.println(sessionFactory);
 		super.setSessionFactory(sessionFactory);
 	}
 	

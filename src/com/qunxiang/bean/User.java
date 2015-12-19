@@ -269,8 +269,7 @@ public class User  implements java.io.Serializable {
 
   //OneToMany指定了一对多的关系，mappedBy="room"指定了由多的那一方来维护关联关系，mappedBy指的是多的一方对1的这一方的依赖的属性，(注意：如果没有指定由谁来维护关联关系，则系统会给我们创建一张中间表)
 //    LazyCollection属性设置成EXTRA指定了当如果查询数据的个数时候，只会发出一条 count(*)的语句，提高性能
-    @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.EXTRA)
+    @OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	public Set<Pic> getPicList() {
 		return picList;
 	}

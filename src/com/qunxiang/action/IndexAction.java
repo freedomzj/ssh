@@ -38,11 +38,6 @@ import com.qunxiang.util.JsonDateValueProcessor;
 @Scope("prototype")
 public class IndexAction {
 	
-	 public IndexAction() {
-		System.out.println("sssssd");
-		// TODO Auto-generated constructor stub
-	}
-	
 	@Autowired
 	private IndustryDao industryDao;
 	@Autowired
@@ -153,10 +148,6 @@ public class IndexAction {
 
 	//首页
 	public String indexUI(){
-		
-		User user = (User) ServletActionContext.getContext().getSession().get("user");
-		System.out.println(user.getPicList());
-		System.out.println(user.getOrderLIst().size());
 		//加载前10条业务能人信息
 		businessList=businessDao.findBusinessByPageSize(1, "businessFocusCount", 10);
 		//加载前10条培训课程信息
