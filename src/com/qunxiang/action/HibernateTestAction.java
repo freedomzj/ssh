@@ -1,7 +1,6 @@
 package com.qunxiang.action;
 import java.util.Set;
 
-import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
