@@ -67,9 +67,7 @@
 		
 		<action name="hibernate_*" class="hibernateTestAction" method="{1}">
 			<result name="htestUI">/WEB-INF/jsp/front/hibernate.jsp</result>		
-			<result name="onetoOne" type="json">
-				<param name="root">user</param>
-			</result>
+			<result name="onetoOne">/WEB-INF/jsp/front/hibernate.jsp</result>
 		</action>
 		
 		<!-- user模块 -->

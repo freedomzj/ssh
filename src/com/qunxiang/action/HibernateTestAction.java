@@ -1,8 +1,7 @@
 package com.qunxiang.action;
-
-import java.util.List;
 import java.util.Set;
 
+import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -24,6 +23,8 @@ public class HibernateTestAction {
 	
 	public String oneToOne(){
 		user=userService.findUserById(1000009);
+		user.setUserPhone("123456789");
+		userService.updateUser(user);
 		Set<Pic> pic=user.getPicList();
 		for (Pic pic2 : pic) {
 			System.out.println(pic2.getPath());
@@ -40,6 +41,8 @@ public class HibernateTestAction {
 	public String htestUI(){
 		return  "htestUI";
 	}
+	
+	
 
 	public User getUser() {
 		return user;

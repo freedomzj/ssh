@@ -28,7 +28,6 @@ public abstract class BaseDaoImpl<T extends Serializable> extends HibernateDaoSu
 	
 	@Autowired
 	public void setMySessionFactory(SessionFactory sessionFactory){
-		System.out.println(sessionFactory);
 		super.setSessionFactory(sessionFactory);
 	}
 	
@@ -134,7 +133,7 @@ public abstract class BaseDaoImpl<T extends Serializable> extends HibernateDaoSu
 	
 
 	public T get(Class<T> entityClass, final Serializable id) {
-		return (T)getHibernateTemplate().get(entityClass, id);
+		return (T)getHibernateTemplate().load(entityClass, id);
 	}
 	
 	@SuppressWarnings("unchecked")
