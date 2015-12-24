@@ -63,12 +63,12 @@ public class HibernateTest {
 			session.update(pic2);
 			temp++;
 		}
-		System.out.println(user.getOrderLIst().size());
+//		System.out.println(user.getOrderLIst().size());
 		System.out.println("级联查询------------------");
-		for (Order order : user.getOrderLIst()) {
-			System.out.println(order.getGoodsSet().size());
-		}
-		System.out.println("执行完修改操作"+temp);
+//		for (Order order : user.getOrderLIst()) {
+//			System.out.println(order.getGoodsSet().size());
+//		}
+//		System.out.println("执行完修改操作"+temp);
 //		session.delete(user);
 //		System.out.println("删除user");
 		

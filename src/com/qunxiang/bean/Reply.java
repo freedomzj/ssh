@@ -6,14 +6,20 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 
 /**
  * Reply entity. @author MyEclipse Persistence Tools
  */
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name="reply"
     ,catalog="qunxiang"

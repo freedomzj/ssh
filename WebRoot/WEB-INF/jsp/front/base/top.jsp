@@ -17,6 +17,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link href="resource/css/basic.css" rel="stylesheet" type="text/css" />
 <link href="resource/css/gongyong.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	.top3_navover{
+		background-color: #005689;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$(".top3_nav ul li").mouseover(function(){
+			$(this).addClass("top3_navover");
+		}).mouseout(function(){
+			$(this).removeClass("top3_navover");
+		});
+	});
+</script>
   </head>
   <body>
      <div class="top_wrap">
@@ -104,6 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="trainChoose_trainChoose.action">培训选择</a></li>
                     <li><a href="trainVote_trainVote.action">培训投票</a></li>
                     <li><a href="question_questionUI.action">业务联系</a></li>
+                    <li><a href="hibernate_htestUI.action">测试hibernate</a></li>
                     </ul>
 					<div class="clear"></div>
                     </div> 

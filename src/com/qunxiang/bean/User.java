@@ -16,6 +16,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -24,6 +26,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 /**
  * User entity. @author MyEclipse Persistence Tools
  */
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name="user"
     ,catalog="qunxiang"
@@ -53,7 +56,7 @@ public class User  implements java.io.Serializable {
      private String userImg1;
      private String userImg2;
      private Set<Pic> picList;
-     private Set<Order> orderLIst;
+     private Set<Order> orderList;
      
     // Constructors
 
@@ -282,13 +285,13 @@ public class User  implements java.io.Serializable {
 
     @OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.EXTRA)
-	public Set<Order> getOrderLIst() {
-		return orderLIst;
+	public Set<Order> getOrderList() {
+		return orderList;
 	}
 
 
-	public void setOrderLIst(Set<Order> orderLIst) {
-		this.orderLIst = orderLIst;
+	public void setOrderList(Set<Order> orderList) {
+		this.orderList = orderList;
 	}
 
 	

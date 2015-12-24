@@ -1,30 +1,22 @@
 package com.qunxiang.action;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
-
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-
-import com.opensymphony.xwork2.ActionContext;
 import com.qunxiang.bean.Business;
 import com.qunxiang.bean.Data;
 import com.qunxiang.bean.Department;
 import com.qunxiang.bean.Industry;
 import com.qunxiang.bean.Train;
-import com.qunxiang.bean.User;
 import com.qunxiang.bean.Vote;
 import com.qunxiang.dao.BusinessDao;
 import com.qunxiang.dao.DataDao;

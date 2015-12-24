@@ -9,7 +9,6 @@
     <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
    
-   
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
@@ -23,8 +22,18 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!--URL伪静态放在struts2过滤器的前面 -->
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+		<!-- <init-param> <param-name>logLevel</param-name> <param-value>DEBUG</param-value> 
+			</init-param> -->
+	</filter>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
 	
-  
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>
@@ -37,37 +46,33 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
-  
-<!--   <filter> -->
-<!--     <description>字符集过滤器</description> -->
-<!--     <filter-name>encodingFilter</filter-name> -->
-<!--     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> -->
-<!--     <init-param> -->
-<!--       <description>字符集编码</description> -->
-<!--       <param-name>encoding</param-name> -->
-<!--       <param-value>UTF-8</param-value> -->
-<!--     </init-param> -->
-<!--   </filter> -->
-<!--   <filter-mapping> -->
-<!--     <filter-name>encodingFilter</filter-name> -->
-<!--     <url-pattern>/*</url-pattern> -->
-<!--   </filter-mapping> -->
-  
-  <!-- 过滤器配置 -->
-<!--   <filter> -->
-<!--   	<filter-name>SystemFilter</filter-name> -->
-<!--   	<filter-class>com.qunxiang.filter.SystemFilter</filter-class> -->
-<!--   </filter> -->
-<!--   <filter-mapping> -->
-<!--   	<filter-name>SystemFilter</filter-name> -->
-<!--   	<url-pattern>/*</url-pattern> -->
-<!--   </filter-mapping> -->
-  
-<!--   <listener> -->
-<!--         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class> -->
-<!--     </listener> -->
-    
-  
+  <!--   字符集过滤器 -->
+  <filter>
+    <description>字符集过滤器</description>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <description>字符集编码</description>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+<!--   过滤器配置 -->
+  <filter>
+  	<filter-name>SystemFilter</filter-name>
+  	<filter-class>com.qunxiang.filter.SystemFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>SystemFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
   <!-- 配置500和404页面 -->
   <error-page>
   	<error-code>404</error-code>

@@ -29,10 +29,21 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
+			
 				<prop key="hibernate.dialect">
 					<!-- org.hibernate.dialect.MySQLDialect -->
 					com.qunxiang.util.CustomerDialect
 				</prop>
+				
+				<!-- 二级缓存配置 -->
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">
+					org.hibernate.cache.ehcache.EhCacheRegionFactory
+				</prop>
+				<prop key="hibernate.cache.use_second_level_cache">
+					true
+				</prop>
+				
 				<prop key="hibernate.show_sql">
 					true
 				</prop>

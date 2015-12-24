@@ -7,7 +7,7 @@
 	<constant name="struts.multipart.maxSize" value="1048576000" />
 	
 	<constant name="struts." value=""></constant>
-	<!-- 设置action的后缀 -->
+<!-- 	设置action的后缀 -->
 <!-- 	<constant name="struts.action.extension" value=""></constant> -->
 	<package name="mypackage" extends="struts-default,json-default" namespace="">
 
@@ -63,6 +63,13 @@
 				<!-- 设置文件读取和下载文件缓冲区的大小 -->
 				<param name="bufferSize">4096</param>
 			 </result>
+		</action>
+		
+		<action name="hibernate_*" class="hibernateTestAction" method="{1}">
+			<result name="htestUI">/WEB-INF/jsp/front/hibernate.jsp</result>		
+			<result name="onetoOne" type="json">
+				<param name="root">user</param>
+			</result>
 		</action>
 		
 		<!-- user模块 -->

@@ -38,7 +38,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <s:iterator value="person" var="persons">
               	 <li>
               	 <div class="xzlog left">
-              		 <a href="business_businessIn.action?businessId=${persons.businessId}"><img src="${persons.businessImg1}" /></a>
+              	 
+              		 <a href="business_businessIn_${persons.businessId}.action"><img src="${persons.businessImg1}" /></a>
               	</div>
               <div class="xzname left">
               	 <a href="business_businessIn.action?businessId=${persons.businessId}">${persons.businessName}</a><p>好评度:<span>${persons.businessFocusCount}</span></p>

@@ -78,7 +78,6 @@ public abstract class BaseDaoImpl<T extends Serializable> extends HibernateDaoSu
 	
 	public void update(T t) {
 		getHibernateTemplate().update(t);
-		getHibernateTemplate().flush();
 	}
 
 	public T findSingle(final String propertyName, final Object value) {
